@@ -1,10 +1,11 @@
 {
   "name": "schemas-openbanking-back",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/index.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "start": "node .",
     "serve": "cross-env NODE_ENV=development DEBUG=app* nodemon ./src/index.js",
     "test": "jest --watchAll --no-cache"
   },
