@@ -63,7 +63,7 @@ const _getOccurrences = (line) => {
 }
 
 const _getObservation = (line) => {
-  return line === 'NA' ? '' : line
+  return line === 'NA' || line === 'N/A' ? '' : line
 }
 
 export const lineMapper = {
