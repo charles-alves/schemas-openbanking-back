@@ -43,6 +43,7 @@ const _createField = (data) => {
     size: data.size,
     required: data.required,
     validation: data.regexValidation,
+    dePara: data.dePara,
     allowedValues: data.allowedValues,
     observation: data.observation
   }
