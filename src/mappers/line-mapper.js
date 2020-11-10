@@ -14,23 +14,25 @@ const REQUIRED_KEY = 'Mandatório'
 const parse = (line) => {
   const obj = {}
 
-  obj.name = _getFieldName(line[NAME_FIELD])
-  obj.level = _getFieldLevel(line[NAME_FIELD])
-  obj.description = line[DESCRIPTION_FIELD]
-  obj.fieldType = line[FIELD_TYPE]
-  obj.size = +line[SIZE_FIELD]
-  obj.required = _isRequired(line[REQUIRED_FIELD])
-  obj.regexValidation = line[REGEX_VALIDATION]
-  obj.allowedValues = _allowedValues(line[ALLOWED_VALUES])
-  obj.minOccurrences = _getOccurrences(line[MIN_OCCURRENCES])
-  obj.maxOccurrences = _getOccurrences(line[MAX_OCCURRENCES])
-  obj.observation = _getObservation(line[OBSERVATION_FIELD])
+  const sanitized = line.map(l => l.trim())
+
+  obj.name = _getFieldName(sanitized[NAME_FIELD])
+  obj.level = _getFieldLevel(sanitized[NAME_FIELD])
+  obj.description = sanitized[DESCRIPTION_FIELD]
+  obj.fieldType = sanitized[FIELD_TYPE]
+  obj.size = +sanitized[SIZE_FIELD]
+  obj.required = _isRequired(sanitized[REQUIRED_FIELD])
+  obj.regexValidation = sanitized[REGEX_VALIDATION]
+  obj.allowedValues = _allowedValues(sanitized[ALLOWED_VALUES])
+  obj.minOccurrences = _getOccurrences(sanitized[MIN_OCCURRENCES])
+  obj.maxOccurrences = _getOccurrences(sanitized[MAX_OCCURRENCES])
+  obj.observation = _getObservation(sanitized[OBSERVATION_FIELD])
 
   return obj
 }
 
 const _getFieldName = (line) => {
-  return line.replace(/[|.<>]/g, '').trim()
+  return line.replace(/[|.<>]/g, '')
 }
 
 const _getFieldLevel = (line) => {

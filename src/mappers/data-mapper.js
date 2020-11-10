@@ -1,4 +1,7 @@
-const STRING_FIELD_TYPE = 'Texto'
+const FIELDS_TYPE_MAP = {
+  Texto: 'String',
+  Booleano: 'boolean'
+}
 
 const createObject = (data, level = 0) => {
   return _createObject([...data], level)
@@ -48,10 +51,10 @@ const _createField = (data) => {
 const _getFieldType = (data) => {
   const isEnum = data.allowedValues.length > 1
 
-  if (isEnum) {
+  if (FIELDS_TYPE_MAP[data.fieldType] !== undefined) {
+    return FIELDS_TYPE_MAP[data.fieldType]
+  } else if (isEnum) {
     return 'Enum'
-  } else if (data.fieldType === STRING_FIELD_TYPE) {
-    return 'String'
   } else {
     return 'Field'
   }
