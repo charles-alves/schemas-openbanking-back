@@ -1,5 +1,6 @@
+const STRING_FIELD_TYPE = 'Texto'
 const FIELDS_TYPE_MAP = {
-  Texto: 'String',
+  [STRING_FIELD_TYPE]: 'String',
   Booleano: 'boolean'
 }
 
@@ -50,15 +51,18 @@ const _createField = (data) => {
 }
 
 const _getFieldType = (data) => {
-  const isEnum = data.allowedValues.length > 1
-
-  if (FIELDS_TYPE_MAP[data.fieldType] !== undefined) {
-    return FIELDS_TYPE_MAP[data.fieldType]
-  } else if (isEnum) {
+  if (_isEnum(data)) {
     return 'Enum'
+  } else if (FIELDS_TYPE_MAP[data.fieldType] !== undefined) {
+    return FIELDS_TYPE_MAP[data.fieldType]
   } else {
     return 'Field'
   }
+}
+
+const _isEnum = (data) => {
+  return data.fieldType === STRING_FIELD_TYPE &&
+    data.allowedValues.length > 1
 }
 
 export const dataMapper = {
