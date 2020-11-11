@@ -1,5 +1,4 @@
 const NAME_FIELD = 0
-const DE_PARA = 2
 const DESCRIPTION_FIELD = 3
 const FIELD_TYPE = 4
 const SIZE_FIELD = 5
@@ -18,7 +17,6 @@ const parse = (line) => {
   const sanitized = line.map(l => l.trim())
 
   obj.name = _getFieldName(sanitized[NAME_FIELD])
-  obj.dePara = sanitized[DE_PARA]
   obj.level = _getFieldLevel(sanitized[NAME_FIELD])
   obj.description = sanitized[DESCRIPTION_FIELD]
   obj.fieldType = sanitized[FIELD_TYPE]
