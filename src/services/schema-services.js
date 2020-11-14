@@ -2,6 +2,8 @@ import { lineMapper } from '../mappers/line-mapper.js'
 import { dataMapper } from '../mappers/data-mapper.js'
 import { Schema } from '../models/schema.js'
 import { ConflictError } from '../errors/conflict-error.js'
+import { NotFoundError } from '../errors/not-fount-error.js'
+import { jsonMapper } from '../mappers/json-mapper.js'
 
 const proccessFile = async (schemaName, multipartFile) => {
   const fileStr = multipartFile.buffer.toString()
@@ -51,9 +53,18 @@ const listNames = () => {
   return Schema.find({}, 'name')
 }
 
+const createJsonResponse = async (schemaName) => {
+  const schema = await findByName(schemaName)
+  if (schema === null) {
+    throw new NotFoundError(`Schema "${schemaName}" doesn't exists`)
+  }
+  return jsonMapper.createJson(schema.structure)
+}
+
 export const schemaService = {
   proccessFile,
   create,
   findByName,
-  listNames
+  listNames,
+  createJsonResponse
 }

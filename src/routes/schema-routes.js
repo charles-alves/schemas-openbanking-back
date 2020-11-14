@@ -13,5 +13,6 @@ routes.post(
   schemaController.fileUpload
 )
 routes.post('/api/schemas', schemaController.save)
+routes.get('/api/schemas/:schemaName/json', schemaController.responseStructure)
 
 export { routes as schemasRoutes }

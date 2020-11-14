@@ -19,22 +19,24 @@ const save = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const schema = await schemaService.findByName(req.params.schemaName)
-  if (schema === null) {
-    throw new NotFoundError(`Schema "${req.params.schemaName}" doesn't exists`)
-  }
+  const schema = await _findByName(req.params.schemaName)
   schema.schemaStructure = req.body.schemaStructure()
   await schema.save()
-  req.status(StatusCodes.OK).json(schema)
+  res.status(StatusCodes.OK).json(schema)
 }
 
 const get = async (req, res) => {
-  const schema = await schemaService.findByName(req.params.schemaName)
-  if (schema === null) {
-    throw new NotFoundError('This schema doesn\'t exists.')
-  }
+  const schema = await _findByName(req.params.schemaName)
 
   res.json(schema)
+}
+
+const _findByName = async (schemaName) => {
+  const schema = await schemaService.findByName(schemaName)
+  if (schema === null) {
+    throw new NotFoundError(`Schema "${schemaName}" doesn't exists`)
+  }
+  return schema
 }
 
 const list = async (req, res) => {
@@ -42,10 +44,16 @@ const list = async (req, res) => {
   res.json(schemas)
 }
 
+const responseStructure = async (req, res) => {
+  const jsonResponse = await schemaService.createJsonResponse(req.params.schemaName)
+  res.json(jsonResponse)
+}
+
 export const schemaController = {
   fileUpload: proccessFile,
   save,
   update,
   get,
-  list
+  list,
+  responseStructure
 }
