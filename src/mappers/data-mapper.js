@@ -9,7 +9,13 @@ const createObject = (data, level = 0) => {
 }
 
 const _createObject = (data, level) => {
-  const obj = level === 0 ? {} : { fieldType: _getObjectType(data) }
+  const meta = {
+    fieldType: _getObjectType(data),
+    required: true,
+    minOccurrences: 1,
+    maxOccurrences: 1
+  }
+  const obj = level === 0 ? {} : { meta }
   let lastField = ''
 
   while (data.length !== 0) {
@@ -21,6 +27,21 @@ const _createObject = (data, level) => {
       break
     } else if (fieldLevel === level) {
       obj[fieldName] = _createField(field)
+      const minOccurrences = _getOcurrencesValue(field.minOccurrences)
+      const maxOccurrences = _getOcurrencesValue(field.maxOccurrences)
+
+      if (
+        typeof minOccurrences === 'string' ||
+        minOccurrences > meta.minOccurrences
+      ) {
+        meta.minOccurrences = minOccurrences
+      }
+      if (
+        typeof maxOccurrences === 'string' ||
+        maxOccurrences > meta.maxOccurrences
+      ) {
+        meta.maxOccurrences = maxOccurrences
+      }
       data.shift()
     } else if (fieldLevel > level) {
       obj[lastField] = _createObject(data, fieldLevel)
@@ -39,14 +60,28 @@ const _getObjectType = (data) => {
 
 const _createField = (data) => {
   return {
-    fieldType: _getFieldType(data),
-    description: data.description,
-    size: data.size,
-    required: data.required,
-    validation: data.regexValidation,
-    allowedValues: data.allowedValues,
-    observation: data.observation
+    meta: {
+      fieldType: _getFieldType(data),
+      description: data.description,
+      size: data.size,
+      required: data.required,
+      validation: data.regexValidation,
+      allowedValues: data.allowedValues,
+      observation: data.observation
+    }
   }
+}
+
+const _getOcurrencesValue = (ocurrences) => {
+  if (ocurrences === '-') {
+    return 1
+  }
+
+  if (ocurrences.toLowerCase() === 'n') {
+    return ocurrences
+  }
+
+  return +ocurrences
 }
 
 const _getFieldType = (data) => {
