@@ -13,7 +13,7 @@ const createJson = (obj) => {
 
 const _mapJsonFields = (obj) => {
   const fields = _excludMetaField(obj)
-  let fieldValue = obj.meta.fieldType
+  let fieldValue = _sheetValue(obj)
   if (_hasSubfields(fields)) {
     fieldValue = _mapSubFields(obj)
   }
@@ -23,6 +23,13 @@ const _mapJsonFields = (obj) => {
 const _excludMetaField = (obj) => {
   return Object.entries(obj)
     .filter(([k]) => k !== 'meta')
+}
+
+const _sheetValue = (obj) => {
+  const meta = obj.meta
+  const validation = meta.validation || meta.fieldType
+  const observation = meta.observation !== '' ? ` obs: ${meta.observation}` : ''
+  return `${validation};${observation}`
 }
 
 const _hasSubfields = (fields) => {
