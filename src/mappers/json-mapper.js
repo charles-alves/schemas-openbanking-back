@@ -1,6 +1,11 @@
+import debug from 'debug'
+
+const log = debug('app:json-mapper')
+
 const createJson = (obj) => {
   const entries = _excludMetaField(obj)
   return entries.reduce((a, [k, v]) => {
+    log(`Mapping field ${k}`)
     a[k] = _mapJsonFields(v)
     return a
   }, {})
@@ -10,7 +15,7 @@ const _mapJsonFields = (obj) => {
   const fields = _excludMetaField(obj)
   let fieldValue = obj.meta.fieldType
   if (_hasSubfields(fields)) {
-    fieldValue = _mapSubFields(fields)
+    fieldValue = _mapSubFields(obj)
   }
   return fieldValue
 }
