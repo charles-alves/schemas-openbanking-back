@@ -26,10 +26,7 @@ const _excludMetaField = (obj) => {
 }
 
 const _sheetValue = (obj) => {
-  const meta = obj.meta
-  const validation = meta.validation || meta.fieldType
-  const observation = meta.observation !== '' ? `obs: ${meta.observation}` : ''
-  return [validation, observation].filter(v => v !== '').join(' | ')
+  return 'String'
 }
 
 const _hasSubfields = (fields) => {
