@@ -5,6 +5,7 @@ const FIELDS_TYPE_MAP = {
 }
 
 const createObject = (data, level = 0) => {
+  console.log('Creating schema')
   return _createObject([...data], level)
 }
 
@@ -66,22 +67,10 @@ const _createField = (data) => {
       size: data.size,
       required: data.required,
       validation: data.regexValidation,
-      allowedValues: data.allowedValues,
+      allowedValues: _toEnumStructure(data.allowedValues),
       observation: data.observation
     }
   }
-}
-
-const _getOcurrencesValue = (ocurrences) => {
-  if (ocurrences === '-') {
-    return 1
-  }
-
-  if (ocurrences.toLowerCase() === 'n') {
-    return ocurrences
-  }
-
-  return +ocurrences
 }
 
 const _getFieldType = (data) => {
@@ -97,6 +86,26 @@ const _getFieldType = (data) => {
 const _isEnum = (data) => {
   return data.fieldType === STRING_FIELD_TYPE &&
     data.allowedValues.length > 1
+}
+
+const _toEnumStructure = (allowedValues) => {
+  return allowedValues.reduce((a, v) => {
+    a.push({
+      enum: /^[A-Z_][A-Z0-9_]*$/.test(v) ? v : null,
+      value: v
+    })
+    return a
+  }, [])
+}
+
+const _getOcurrencesValue = (ocurrences) => {
+  if (ocurrences === '-') {
+    return 1
+  }
+  if (ocurrences.toLowerCase() === 'n') {
+    return ocurrences
+  }
+  return +ocurrences
 }
 
 export const dataMapper = {
