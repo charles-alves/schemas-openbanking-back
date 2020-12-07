@@ -1,3 +1,7 @@
+import debug from 'debug'
+
+const log = debug('app:data-mapper')
+
 const STRING_FIELD_TYPE = 'Texto'
 const FIELDS_TYPE_MAP = {
   [STRING_FIELD_TYPE]: 'String',
@@ -5,7 +9,12 @@ const FIELDS_TYPE_MAP = {
 }
 
 const createObject = (data, level = 0) => {
-  console.log('Creating schema')
+  log('Creating schema')
+
+  if (data.length === 0) {
+    return {}
+  }
+
   return _createObject([...data], level)
 }
 
