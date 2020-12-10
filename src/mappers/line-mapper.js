@@ -10,6 +10,7 @@ const MAX_OCCURRENCES = 10
 const OBSERVATION_FIELD = 11
 
 const REQUIRED_KEY = 'Mandatório'
+const REQUIRED_KEY_V2 = 'Obrigatório'
 
 const parse = (line) => {
   const obj = {}
@@ -40,7 +41,7 @@ const _getFieldLevel = (line) => {
 }
 
 const _isRequired = (line) => {
-  return line === REQUIRED_KEY
+  return line === REQUIRED_KEY || line === REQUIRED_KEY_V2
 }
 
 const _allowedValues = (line) => {
