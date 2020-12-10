@@ -23,7 +23,7 @@ describe('Testing class util to data mappers', () => {
     it('should throws an erro when receaves an invalid parameter', () => {
       expect(() => {
         dataMapperUtils.getOcurrencesValue('a')
-      }).toThrow(Error)
+      }).toThrow('a não é um valor válido para o campo ocorrências')
     })
   })
 
@@ -101,7 +101,9 @@ describe('Testing class util to data mappers', () => {
         required: true,
         regexValidation: '\\w*\\W*',
         allowedValues: [],
-        observation: ''
+        observation: '',
+        minOccurrences: '1',
+        maxOccurrences: '1'
       })
 
       expect(field).toEqual({
@@ -112,7 +114,9 @@ describe('Testing class util to data mappers', () => {
           required: true,
           validation: '\\w*\\W*',
           allowedValues: [],
-          observation: ''
+          observation: '',
+          minOccurrences: 1,
+          maxOccurrences: 1
         }
       })
     })
@@ -125,7 +129,9 @@ describe('Testing class util to data mappers', () => {
         required: true,
         regexValidation: '\\w*\\W*',
         allowedValues: ['A', 'B', 'C'],
-        observation: ''
+        observation: '',
+        minOccurrences: '1',
+        maxOccurrences: '1'
       })
 
       expect(field).toEqual({
@@ -149,7 +155,9 @@ describe('Testing class util to data mappers', () => {
               value: 'C'
             }
           ],
-          observation: ''
+          observation: '',
+          minOccurrences: 1,
+          maxOccurrences: 1
         }
       })
     })
@@ -162,7 +170,9 @@ describe('Testing class util to data mappers', () => {
         required: true,
         regexValidation: '\\w*\\W*',
         allowedValues: ['A', 'B', 'C'],
-        observation: ''
+        observation: '',
+        minOccurrences: '1',
+        maxOccurrences: '1'
       })
 
       expect(field).toEqual({
@@ -186,7 +196,9 @@ describe('Testing class util to data mappers', () => {
               value: 'C'
             }
           ],
-          observation: ''
+          observation: '',
+          minOccurrences: 1,
+          maxOccurrences: 1
         }
       })
     })
