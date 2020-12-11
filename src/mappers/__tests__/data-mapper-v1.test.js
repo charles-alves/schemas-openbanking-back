@@ -1,6 +1,6 @@
 import { dataMapperV1 } from '../data-mapper-v1.js'
 
-describe('dataMapper test', () => {
+describe('dataMapperV1 test', () => {
   it('should resturn an empty object if the array is also empty', () => {
     const response = dataMapperV1.createObject([])
 
