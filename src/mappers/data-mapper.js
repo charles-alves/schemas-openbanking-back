@@ -6,7 +6,7 @@ const createObject = (data) => {
     return {}
   }
 
-  if (data.some(d => d.fieldType === 'List' || d.fieldType === 'Object')) {
+  if (data.some(d => d.fieldType === 'Lista' || d.fieldType === 'Objecto')) {
     return dataMapperV2.createObject(data)
   } else {
     return dataMapperV1.createObject(data)

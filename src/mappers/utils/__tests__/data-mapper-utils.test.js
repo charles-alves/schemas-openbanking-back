@@ -48,7 +48,7 @@ describe('Testing class util to data mappers', () => {
 
     it('should return Object to a Object field type', () => {
       const fieldType = dataMapperUtils.getFieldType({
-        fieldType: 'Object',
+        fieldType: 'Objeto',
         allowedValues: []
       })
 
@@ -66,7 +66,7 @@ describe('Testing class util to data mappers', () => {
 
     it('should return List to a List field type', () => {
       const fieldType = dataMapperUtils.getFieldType({
-        fieldType: 'List',
+        fieldType: 'Lista',
         allowedValues: []
       })
 

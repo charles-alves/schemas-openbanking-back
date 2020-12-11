@@ -2,8 +2,8 @@ const STRING_FIELD_TYPE = 'Texto'
 const FIELDS_TYPE_MAP = {
   [STRING_FIELD_TYPE]: 'String',
   Booleano: 'boolean',
-  List: 'List',
-  Object: 'Object'
+  Lista: 'List',
+  Objeto: 'Object'
 }
 
 const createField = (data) => {

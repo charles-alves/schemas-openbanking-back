@@ -144,7 +144,7 @@ describe('dataMapperV2 test', () => {
         name: 'loans',
         level: 1,
         description: '',
-        fieldType: 'List',
+        fieldType: 'Lista',
         size: 0,
         required: true,
         regexValidation: '',
