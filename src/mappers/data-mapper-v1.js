@@ -65,6 +65,6 @@ const _getObjectType = (data) => {
   return isList ? 'List' : 'Object'
 }
 
-export const dataMapper = {
+export const dataMapperV1 = {
   createObject
 }

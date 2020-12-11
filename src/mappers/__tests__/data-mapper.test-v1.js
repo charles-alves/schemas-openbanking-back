@@ -1,14 +1,14 @@
-import { dataMapper } from '../data-mapper.js'
+import { dataMapperV1 } from '../data-mapper-v1.js'
 
 describe('dataMapper test', () => {
   it('should resturn an empty object if the array is also empty', () => {
-    const response = dataMapper.createObject([])
+    const response = dataMapperV1.createObject([])
 
     expect(response).toEqual({})
   })
 
   it('should process the fisrt level object', () => {
-    const result = dataMapper.createObject([
+    const result = dataMapperV1.createObject([
       {
         name: 'brand',
         level: 0,
@@ -42,7 +42,7 @@ describe('dataMapper test', () => {
   })
 
   it('should process multiple lines', () => {
-    const result = dataMapper.createObject([
+    const result = dataMapperV1.createObject([
       {
         name: 'brand',
         level: 0,
@@ -97,7 +97,7 @@ describe('dataMapper test', () => {
   })
 
   it('should process mim ocurrences iguals 4', () => {
-    const result = dataMapper.createObject([
+    const result = dataMapperV1.createObject([
       {
         name: 'brand',
         level: 0,
@@ -152,7 +152,7 @@ describe('dataMapper test', () => {
   })
 
   it('should process max ocurrences iguals 33', () => {
-    const result = dataMapper.createObject([
+    const result = dataMapperV1.createObject([
       {
         name: 'brand',
         level: 0,
