@@ -1,5 +1,4 @@
 import { dataMapperV2 } from '../data-mapper-v2.js'
-import { dataMapperUtils } from '../utils/data-mapper-utils.js'
 
 describe('dataMapperV2 test', () => {
   it('should create an empty object', () => {
