@@ -1,5 +1,4 @@
 import { dataMapperV1 } from '../data-mapper-v1.js'
-import { dataMapper } from '../data-mapper.js'
 
 describe('dataMapperV1 test', () => {
   it('should resturn an empty object if the array is also empty', () => {
