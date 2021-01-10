@@ -6,11 +6,16 @@ const schema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  group: {
+    type: String,
+    required: true
+  },
   structure: {
     type: mongoose.Schema.Types.Mixed,
     required: true
   }
 }, {
+  timestamps: true,
   toJSON: {
     transform (doc, ret) {
       delete ret._id

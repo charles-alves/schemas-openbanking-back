@@ -8,7 +8,11 @@ const log = debug('app:file-controller')
 
 const proccessFile = async (req, res) => {
   log(`Uploading file ${req.file.originalname}`)
-  const schema = await schemaService.proccessFile(req.body.name, req.file)
+  const schema = await schemaService.proccessFile(
+    req.body.name,
+    req.body.group,
+    req.file
+  )
   res.status(StatusCodes.OK).json(schema)
   log(`Uploading file ${req.file.originalname}, done.`)
 }

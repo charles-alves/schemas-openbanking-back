@@ -5,12 +5,13 @@ import { ConflictError } from '../errors/conflict-error.js'
 import { NotFoundError } from '../errors/not-fount-error.js'
 import { jsonMapper } from '../mappers/json-mapper.js'
 
-const proccessFile = async (schemaName, multipartFile) => {
+const proccessFile = async (schemaName, schemaGroup, multipartFile) => {
   const fileStr = multipartFile.buffer.toString()
   const data = _sanitizeFile(fileStr)
   const structure = _createSchemaStructure(data)
   return {
     name: schemaName,
+    group: schemaGroup,
     structure
   }
 }
@@ -50,7 +51,7 @@ const findByName = async (schemaName) => {
 }
 
 const listNames = () => {
-  return Schema.find({}, 'name')
+  return Schema.find({}, 'name group')
 }
 
 const createJsonResponse = async (schemaName) => {
