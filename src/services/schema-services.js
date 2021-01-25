@@ -51,7 +51,7 @@ const findByName = async (schemaName) => {
 }
 
 const listNames = () => {
-  return Schema.find({}, 'name group')
+  return Schema.find({}, 'name group').sort({ group: 1, name: 1 })
 }
 
 const createJsonResponse = async (schemaName) => {
