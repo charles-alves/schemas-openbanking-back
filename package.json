@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node .",
+    "start": "node --experimental-vm-modules .",
     "serve": "cross-env NODE_ENV=development DEBUG=app* nodemon ./src/index.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watchAll --no-cache"
   },
@@ -34,6 +34,6 @@
     "nodemon": "^2.0.6"
   },
   "engines": {
-    "node": "14.x"
+    "node": "12.x"
   }
 }
